@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>John Andres Ibarra Oviedo - CV Moderno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Segoe UI', 'Roboto', 'Poppins', 'Montserrat', sans-serif;
+            padding: 40px 20px;
+            color: #1a2c3e;
+        }
+
+        .cv-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 34% 66%;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #0b2b3b;
+            color: #e0f2fe;
+            padding: 2rem 1.5rem;
+        }
+
+        .profile-img {
+            text-align: center;
+            margin-bottom: 1.8rem;
+        }
+        .profile-img img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #2c9b9b;
+            box-shadow: 0 8px 14px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .sidebar h3 {
+            color: #ffd966;
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.8rem 0;
+            border-left: 4px solid #ffd966;
+            padding-left: 12px;
+        }
+
+        .contact-info p, .idiomas p, .intereses p {
+            margin: 0.4rem 0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .docs-gallery {
+            margin-top: 1rem;
+        }
+        .doc-thumb {
+            background: #1e4a62;
+            border-radius: 16px;
+            padding: 0.6rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .doc-thumb:hover {
+            transform: scale(1.02);
+        }
+        .doc-thumb img {
+            width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .doc-thumb p {
+            font-size: 0.7rem;
+            color: #cbd5e6;
+            margin-top: 6px;
+        }
+
+        /* Main content */
+        .main-content {
+            background: white;
+            padding: 2rem 2rem 2rem 1.8rem;
+        }
+
+        .name-title h1 {
+            font-size: 2.2rem;
+            color: #0b2b3b;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .tagline {
+            color: #2c7a7a;
+            font-weight: 500;
+            border-bottom: 3px solid #ffd966;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 1.2rem;
+        }
+
+        .section {
+            margin-bottom: 1.8rem;
+        }
+        .section h2 {
+            font-size: 1.4rem;
+            color: #0f3b4f;
+            border-left: 5px solid #ffb347;
+            padding-left: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .job {
+            margin-bottom: 1.2rem;
+        }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 0.2rem;
+        }
+        .job-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1e4a62;
+        }
+        .job-date {
+            font-size: 0.8rem;
+            color: #5a6e7c;
+        }
+        .company {
+            font-weight: 500;
+            color: #2c7a7a;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+        .job-list {
+            padding-left: 1.2rem;
+            margin-top: 0.3rem;
+        }
+        .job-list li {
+            margin-bottom: 0.3rem;
+            font-size: 0.88rem;
+            line-height: 1.4;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        .badge-skill {
+            background: #eef2fa;
+            color: #1f5e7e;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .reference-card {
+            background: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 780px) {
+            .cv-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cv-container">
+    <div class="cv-grid">
+        <div class="sidebar">
+            <div class="profile-img">
+                <img src="imagenes_cv/foto_de_perfil.jpeg" alt="Foto de perfil John Andres">
+            </div>
+
+            <div class="contact-info">
+                <h3>📞 CONTACTO</h3>
+                <p>📱 3157621095</p>
+                <p>✉️ johnanib19@gmail.com</p>
+                <p>🎂 22 años</p>
+                <p>📍 Pasto, Colombia</p>
+            </div>
+
+            <div class="idiomas">
+                <h3>🌐 IDIOMAS</h3>
+                <p>Inglés | Intermedio (B1)</p>
+            </div>
+
+            <div class="intereses">
+                <h3>🎨 INTERESES</h3>
+                <p>📸 Fotografía • 🎵 Música • ✂️ Edición • 📚 Aprendizaje empírico</p>
+            </div>
+
+            <div class="docs-gallery">
+                <h3>📄 DOCUMENTOS ADJUNTOS</h3>
+                <div class="doc-thumb">
+                    <img src="imagenes_cv/acta_de_grado.jpg" alt="Acta de grado">
+                    <p>ACTA DE GRADO - BACHILLER</p>
+                </div>
+                <div class="doc-thumb">
+                    <img src="imagenes_cv/diploma.jpg" alt="diploma">
+                    <p>TÍTULO BACHILLER ACADÉMICO</p>
+                </div>
+                <div class="doc-thumb">
+                    <img src="imagenes_cv/certificacion_ejercito.jpg" alt="certificado militar">
+                    <p>CERTIFICADO MILITAR - EJÉRCITO</p>
+                </div>
+                <div class="doc-thumb">
+                    <img src="imagenes_cv/constancia_tokiocel.jpg" alt="Constancia Tokiocel">
+                    <p>CONSTANCIA TOKIOCE</p>
+                </div>
+                <div class="doc-thumb">
+                    <img src="imagenes_cv/constancia_papeleria.jpg" alt="Constancia Papelarte">
+                    <p>CONSTANCIA PAPELARTE CREATIVO</p>
+                </div>
+                <div class="doc-thumb">
+                    <img src="imagenes_cv/cedula.jpg" alt="cedula">
+                    <p>C.C. 1.080.690.345</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="name-title">
+                <h1>John Andres Ibarra Oviedo</h1>
+                <div class="tagline">Atención al Cliente | Ventas | Logística</div>
+            </div>
+
+            <div class="section">
+                <h2>🎯 Perfil Profesional</h2>
+                <p>Joven proactivo con amplia experiencia en atención al cliente, ventas, logística y manejo de inventarios. Habilidad para resolver conflictos, comunicación asertiva y enfoque en la satisfacción del cliente. Acostumbrado a trabajar bajo presión y en equipos multidisciplinarios. Busco aportar mi conocimiento y crecer profesionalmente en roles operativos o de atención al cliente.</p>
+            </div>
+
+            <div class="section">
+                <h2>💼 Experiencia Laboral</h2>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <span class="job-title">Asistente de Ventas y Logística</span>
+                        <span class="job-date">Mar 2025 – Oct 2025</span>
+                    </div>
+                    <div class="company">PapelArte Creativo (Papelería) – Pasto</div>
+                    <ul class="job-list">
+                        <li>Atención al cliente presencial y telefónica, asesorando en productos de papelería y artículos de oficina.</li>
+                        <li>Manejo de caja registradora, facturación y cierre de caja diario.</li>
+                        <li>Control y administración de inventario mediante hojas de cálculo en Excel (filtros, tablas dinámicas, validación de datos).</li>
+                        <li>Organización y reposición de productos en vitrinas y bodega.</li>
+                        <li>Apoyo en la recepción de pedidos a proveedores y verificación de mercancía.</li>
+                        <li>Elaboración de informes semanales de ventas y productos más vendidos.</li>
+                    </ul>
+                    <div style="font-size:0.8rem; color:#2c7a7a;">👤 Referencia: Berne Antonio Chamorro Beltrán - Dueño | 📞 3017353954</div>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <span class="job-title">Soldado</span>
+                        <span class="job-date">Jul 2023 – Ago 2024</span>
+                    </div>
+                    <div class="company">Ejército Nacional de Colombia – Mocoa</div>
+                    <ul class="job-list">
+                        <li>Participación en operaciones de patrullaje en áreas designadas.</li>
+                        <li>Mantenimiento y limpieza regular del equipo militar asignado.</li>
+                        <li>Supervisión del cumplimiento de normas de seguridad por el 100% del equipo.</li>
+                        <li>Apoyo logístico en la distribución de suministros y recursos.</li>
+                        <li>Respuesta efectiva en situaciones de emergencia según protocolos.</li>
+                        <li>Cumplimiento de objetivos operacionales.</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <span class="job-title">Dependiente de tienda</span>
+                        <span class="job-date">Nov 2021 – Mar 2023</span>
+                    </div>
+                    <div class="company">Tokioce – Pasto</div>
+                    <ul class="job-list">
+                        <li>Atención personalizada a clientes, resolviendo dudas y ofreciendo recomendaciones.</li>
+                        <li>Reposición y organización de productos en estanterías.</li>
+                        <li>Gestión de inventario mediante control regular y actualización de registros.</li>
+                        <li>Cobro en caja y manejo de efectivo con precisión y rapidez.</li>
+                        <li>Mantenimiento de la limpieza y orden en el espacio de ventas.</li>
+                        <li>Recepción y verificación de nuevos pedidos.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📖 Formación</h2>
+                <div><strong>Bachiller Académico</strong> – I.E.M. Ciudad de Pasto (Ene 2015 - Dic 2021)</div>
+            </div>
+
+            <div class="section">
+                <h2>⚙️ Habilidades</h2>
+                <div class="skills-list">
+                    <span class="badge-skill">📞 Atención al cliente</span>
+                    <span class="badge-skill">📊 Excel avanzado (tablas dinámicas, BUSCARV, validación de datos)</span>
+                    <span class="badge-skill">💰 Manejo de caja</span>
+                    <span class="badge-skill">📦 Administración de inventarios</span>
+                    <span class="badge-skill">🤝 Trabajo bajo presión</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📌 Referencias</h2>
+                <div class="reference-card">
+                    <strong>Dayam Andrea Oviedo Jacome</strong><br>
+                    Jefe de archivo - Seguridad del Sur<br>
+                    📧 dayam_oviedo@hotmail.com | 📞 3114026051
+                </div>
+                <div class="reference-card">
+                    <strong>Berne Antonio Chamorro Beltrán</strong><br>
+                    Dueño - PapelArte Creativo<br>
+                    📞 3017353954
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="imageModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModal = document.querySelector('.close-modal');
+    
+    document.querySelectorAll('.doc-thumb img, .profile-img img').forEach(img => {
+        img.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            modalImg.src = img.src;
+        });
+    });
+    
+    closeModal.addEventListener('click', () => modal.style.display = 'none');
+    modal.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
+</script>
+</body>
+</html>
